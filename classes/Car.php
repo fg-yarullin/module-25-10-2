@@ -1,14 +1,25 @@
 <?php
 
-class Car extends Automobile {
+//require __DIR__ . '/../interfaces/Tunning.php';
+require __DIR__ . '/../interfaces/tunning/nitrousOxideSystem.php';
+require __DIR__ . '/../interfaces/tunning/remapping.php';
+require __DIR__ . '/../interfaces/beep.php';
+require __DIR__ . '/../interfaces/wipersOn.php';
+require __DIR__ . '/../interfaces/interior.php';
+
+class Car extends Automobile implements interior,nitrousOxideSystem, remapping, beep, wipersOn {
     private $seatsCount;
+    private $bodyType;
 
-    // private function construct($vin) {
-    //     $this->vin = $vin;
-    // }
+    public function __construct(string $vin, string $model, string $manufactureDate, int $weight) {
+        $this->vin = $vin;
+        $this->model = $model;
+        $this->manufactureDate = $manufactureDate;
+        $this->weight = $weight;
+    }
 
-    function movement($direction) {
-        return "Move to {$direction}.";
+    public function movement($direction) {
+        return "Move to {$direction}";
     }
 
     function setRegistrationData(Array $data) {
@@ -25,7 +36,7 @@ class Car extends Automobile {
         }
     }
 
-    function getRegistrationData() {
+    public function getRegistrationData() {
         if (!empty($this->vin) || !empty($this->model) || !empty($this->manufactureDate)) {
             return (
                 array(
@@ -35,12 +46,46 @@ class Car extends Automobile {
                 )
             );
         } else {
-            return 'Registration information has not set yet.<br>';
+            return 'Registration information has not set yet<br>';
         }
         
     }
 
-    function getSeatsCount() {
+    public function getSeatsCount() {
         return $this->seatsCount;
+    }
+
+/* ---------------using the interface--------------------- */
+    /**
+     * bool $flag - set it true to add Nitrous Oxide System, otherwise set false
+     */
+    public function addNos() {
+        return 'Application for the "Nitrous Oxide System" kit instaling is accepted';
+    }
+
+    public function chipping() {
+        return 'Application for the engine chipping is accepted';
+    }
+
+    public function beep() {
+        return 'beep beeeep beep';
+    }
+
+    public function wipersOn(bool $isRainy) {
+        if ($isRainy) {
+            return 'Turn on the wipers.';
+        } else {
+            return 'Turn off the wipers';
+        }
+    }
+
+    public function interior($interiorOptions = []) {
+        $options = '';
+        if (isset($interiorOptions)) {
+            foreach($interiorOptions as $key => $value) {
+                $options .= "$key: $value<br>";
+            }
+        }
+        return $options;
     }
 }

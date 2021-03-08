@@ -1,5 +1,5 @@
 <?php
 
-abstract class Car extends Automobile {
-    abstract function getPassengerSeatsCount();
+class Excavator extends Automobile {
+    // ...
 }

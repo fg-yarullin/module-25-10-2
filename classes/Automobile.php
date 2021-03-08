@@ -1,5 +1,4 @@
 <?php
-
 //Automobile.php
 
 abstract class Automobile {

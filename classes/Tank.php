@@ -4,12 +4,12 @@ class Tank extends Automobile {
 
     private $ammunitionCount;
 
-    public function __construct($ammunition) {
+    public function __construct(int $ammunition) {
         $this->ammunitionCount = $ammunition;
     }
 
     function movement($direction) {
-        return "(Movement) {$direction}.";
+        return "(Movement) {$direction}";
     }
 
     function setRegistrationData(Array $data) {
@@ -22,7 +22,7 @@ class Tank extends Automobile {
             if (isset($data['width'])) $this->width = $data['width'];
             if (isset($data['height'])) $this->height = $data['height'];
         } else {
-            return exit("No registration data.");
+            return exit("No registration data entered");
         }
     }
 
@@ -36,7 +36,7 @@ class Tank extends Automobile {
                 )
             );
         } else {
-            return 'Registration information has not set yet.<br>';
+            return 'Registration information has not set yet<br>';
         }
         
     }
@@ -46,9 +46,9 @@ class Tank extends Automobile {
         if ($ammunitionCountLeft > 0) {
             $ammunitionCountLeft--;
             $this->setAmmunitionCount($ammunitionCountLeft);
-            return "Tank shots. Shots left: {$ammunitionCountLeft}.";
+            return "Tank shots. Shots left: {$ammunitionCountLeft}";
         } else {
-            return 'Ammunition is out of.';
+            return 'Ammunition is out of';
         }
     }
 

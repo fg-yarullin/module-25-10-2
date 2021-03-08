@@ -1,4 +1,5 @@
 <?php
 
-abstract class Truck extends Automobile {
+class Truck extends Automobile {
+    // ...
 }

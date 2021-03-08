@@ -1,6 +1,6 @@
 <?php
 
-function moveAutomobile(Automobile $automobile, $direction) {
+function doMovement(Automobile $automobile, $direction) {
     echo $automobile->movement($direction) . '<br>';
 }
 
@@ -16,4 +16,25 @@ function getRegistrationData(Automobile $automobile) {
     } else {
         echo $registrationData;
     }
+}
+
+/** 
+ * Tunning options Array $tunningOptions ['full' => value, 'nos' => value, 'chipping' => value]. 
+*/
+
+function tunning (Car $car, $tunningOptions = []) {
+    if (!empty($tunningOptions)) {
+        $result =[];
+        foreach ($tunningOptions as $option) {
+            if ($option === 'full') {
+                $result = "<li>{$car->addNos()}</li><li>{$car->chipping()}</li>";
+            } else {
+                array_push($result, "<li>{$car->$option()}</li>");
+            }
+        }
+        return $result;
+    } else {
+        return;
+    }
+
 }
